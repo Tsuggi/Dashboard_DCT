@@ -17,6 +17,14 @@ const router = createRouter({
           path: '/tonnage',
           component: () => import('@/views/TonnageView.vue')
         },
+        {
+          path: '/waiting',
+          component: () => import('@/views/WaitingView.vue')
+        },
+        {
+          path: '/taches',
+          component: () => import('@/views/TasksView.vue')
+        },
       ]
     }
   ]
