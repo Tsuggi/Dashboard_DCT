@@ -4,24 +4,26 @@
             <li class="hover:bg-[#59667d] hover:rounded-l-lg pl-3 text-sm text-white relative"
                 v-for="(item, index) in menu" :key="index">
                 <i :class="item.icon" class="pr-2"></i>
-                <RouterLink :to="item.to" exactActiveClass="font-bold">{{ item.label }}
-                    <i :class="item.posticon" class="pl-2 absolute top-1" @mouseover="flecheMenuDown"
-                        @mouseleave="flecheMenuRight"></i>
+                <RouterLink :to="item.to" exactActiveClass="font-bold" @mouseover="flecheMenuDown(item.posticon)"
+                    @mouseleave="flecheMenuRight">
+                    {{ item.label }}
+                    <i :class="item.posticon" class="pl-2 absolute top-1"></i>
                 </RouterLink>
             </li>
         </ul>
+
     </nav>
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
-
-const flecheMenuDown = () => {
-    menu[4].posticon = "pi pi-angle-down"
+import TreeItem from "@/components/menu/TreeItem.vue";
+const flecheMenuDown = (item) => {
+    if (item == "pi pi-angle-right") {
+        menu[4].posticon = "pi pi-angle-down"
+    }
 }
-const flecheMenuRight = () => {
-    menu[4].posticon = "pi pi-angle-right"
-}
+const flecheMenuRight = () => menu[4].posticon = "pi pi-angle-right"
 
 const menu = reactive([
     {
@@ -48,7 +50,17 @@ const menu = reactive([
         label: "Déchetteries",
         icon: "pi pi-trash",
         posticon: "pi pi-angle-right",
-        to: "/dct"
+        to: "/waiting",
+        children: [
+            { name: 'Belz' },
+            { name: 'Carnac' },
+            { name: 'Pluvigner' },
+            { name: 'Saint-Anne' },
+            { name: 'Quiberon' },
+            { name: 'Crach' },
+        ]
+
     },
 ])
+
 </script>
